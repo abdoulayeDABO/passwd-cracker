@@ -1,14 +1,14 @@
 
-public class App {
+public class CrackerApp {
 
     public static boolean verifier_argumets(String[] args) {
         if (args.length < 2 || args.length > 3) {
-            System.out.println("Usage: java App <type> <cible> <login>");
+            System.out.println("Usage: java CrackerApp <type> <cible> <login>");
             return false;
         }
 
-        if (!args[0].equals("dictionnary") && !args[0].equals("brute-force")) {
-            System.out.println("Type d'attaque non reconnu. Veuillez spécifier 'dictionnary' ou 'brute-force'.");
+        if (!args[0].equals("dictionnary") && !args[0].equals("bruteForce")) {
+            System.out.println("Type d'attaque non reconnu. Veuillez spécifier 'dictionnary' ou 'bruteForce'.");
             return false;
         }
 
@@ -45,11 +45,11 @@ public class App {
             case "dictionnary":
                 fabrique = new FabriqueAttaqueDictionnaire();
                 break;
-            case "brute-force":
+            case "bruteForce":
                 fabrique = new FabriqueAttaqueBruteForce();
                 break;
             default:
-                System.out.println("Type d'attaque non reconnu. Veuillez spécifier 'dictionnary' ou 'brute-force'.");
+                System.out.println("Type d'attaque non reconnu. Veuillez spécifier 'dictionnary' ou 'bruteForce'.");
                 return;
         }
 

