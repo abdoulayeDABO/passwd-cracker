@@ -9,6 +9,7 @@ import java.net.http.HttpResponse.BodyHandlers;
 import utils.HttpUtils;
 import utils.PasswordUtils;
 import java.util.Arrays;
+import utils.ConsoleUtils;
 
 public class AttaqueBruteForce extends Attaque {
 
@@ -31,9 +32,8 @@ public class AttaqueBruteForce extends Attaque {
                         
                         int exitCode = process.waitFor();
                         if (exitCode == 0) {
-                            System.out.println("=================================");
-                            System.out.println("Mot de passe trouve: " + password);
-                            System.out.println("=================================");
+                            System.out.print("Mot de passe trouve: ");
+                            ConsoleUtils.success(password);
                             break;
                         }
                     }
@@ -58,9 +58,8 @@ public class AttaqueBruteForce extends Attaque {
                         System.out.println("Statut: " + response.statusCode());
 
                         if (response.statusCode() == 200) {
-                            System.out.println("=================================");
-                            System.out.println("Mot de passe trouve: " + password);
-                            System.out.println("=================================");
+                            System.out.print("Mot de passe trouve: ");
+                            ConsoleUtils.success(password);
                             break;
                         }
                     }
