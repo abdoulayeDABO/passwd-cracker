@@ -21,7 +21,7 @@ public class HttpUtils {
                 .timeout(Duration.ofMinutes(2))
                 .header("User-Agent", "Java HttpClient")
                 .header("Content-Type", "application/x-www-form-urlencoded")
-                .POST(HttpRequest.BodyPublishers.ofString("login=" + login + "&password=" + password))
+                .POST(HttpRequest.BodyPublishers.ofString("username=" + login + "&password=" + password))
                 .build();
     }
 }

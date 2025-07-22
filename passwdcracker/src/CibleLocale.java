@@ -5,7 +5,7 @@ public class CibleLocale implements CibleAuthentification {
     @Override
     public boolean testerMotDePasse(String login, String motDePasse) {
         try {
-            String[] command = {"java", "-cp", "./cibles", "Login", login, motDePasse};
+            String[] command = {"java", "-cp", "./out", "Login", login, motDePasse};
             Process process = new ProcessBuilder(command).start();
             BufferedReader resultat = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String output = resultat.readLine();
