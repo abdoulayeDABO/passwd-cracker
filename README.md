@@ -79,16 +79,20 @@ passwdcracker/
 - **Historique** : Sauvegarde des résultats d'attaques
 
 
-## **Comment Compiler ?**
+## 🚀 Installation et Compilation
+
+### Prérequis
+- Java JDK 8 ou supérieur
+- Serveur web local (pour les tests en ligne)
 
 
-## **Confuguration pour tester les attaques remote**
+### **Confuguration pour tester les attaques remote**
 1. Installer XAMPP ou WAMP
 2. Copier `cibles/login.php` dans le dossier `htdocs/app/`
 3. Démarrer Apache
 4. Le fichier sera accessible sur `http://localhost/app/login.php`
 
-## **Comment Executer ?**
+### **Comment Executer ?**
 ```bash
 # Tester toutes les combinaisons
 java -cp out CrackerApp bruteForce local admin
