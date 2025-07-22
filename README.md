@@ -44,6 +44,50 @@ passwdcracker/
 ├── test-server.bat      # Script de test manuel du serveur
 └── README-AMELIORE.md                      # Ce fichier
 ```
+## Choix des patrons de conception utilisés et leur justification
+### 1. Pattern Factory Method (Patron Fabrique)
+Choix du pattern
+Nous avons opté pour l'implémentation du Factory Method plutôt que l'Abstract Factory pour ce projet.
+Justification technique
+Problématique adressée :
+Le projet nécessite de créer dynamiquement différentes combinaisons de stratégies d'attaque (Brute Force, Dictionnaire) avec différents types de cibles (locale, en ligne). Sans pattern Factory, nous aurions eu un couplage fort entre le client et les classes concrètes, avec de nombreuses conditions if/else ou switch pour instancier les bonnes combinaisons.
+Avantages apportés :
+
+Découplage : Le code client n'a pas besoin de connaître les classes concrètes d'attaques
+Extensibilité : Ajout facile de nouvelles méthodes d'attaque ou types de cibles sans modifier le code existant
+Respect du principe Ouvert/Fermé : Le système est ouvert à l'extension mais fermé à la modification
+Configuration dynamique : Possibilité de choisir la stratégie d'attaque via les arguments en ligne de commande
+
+
+### 2. Pattern Strategy (Patron Stratégie)
+Justification du choix complémentaire
+Bien que non explicitement demandé, le pattern Strategy s'est naturellement intégré à notre architecture pour gérer les différents algorithmes d'attaque.
+Problématique :
+Les méthodes Brute Force et Dictionnaire ont des algorithmes complètement différents, mais partagent la même interface de base (attaquer une cible avec des identifiants).
+Avantages :
+
+Interchangeabilité : Possibilité de changer d'algorithme d'attaque à l'exécution
+Isolation des algorithmes : Chaque stratégie est encapsulée dans sa propre classe
+Testabilité améliorée : Chaque stratégie peut être testée indépendamment
+
+### 3. Synergie Factory Method + Strategy
+La combinaison des deux patterns crée une architecture particulièrement robuste :
+
+Le Factory Method gère la création des objets selon la configuration
+Le Strategy gère le comportement des algorithmes d'attaque
+
+Cette synergie permet une flexibilité maximale : on peut facilement ajouter de nouvelles stratégies d'attaque (Rainbow Tables, Hybrid Attack) ou de nouveaux types de cibles (base de données, API REST) sans impacter le code existant.
+### 4. Alternative considérée : Abstract Factory
+Pourquoi pas Abstract Factory ?
+L'Abstract Factory aurait été pertinent si nous avions eu des familles de produits plus complexes (par exemple : différents types d'encodage pour chaque type d'attaque). Dans notre cas, le Factory Method est suffisant et moins complexe à maintenir.
+### 5. Respect des principes SOLID
+
+    S (Single Responsibility) : Chaque factory ne crée qu'un type spécifique de cracker
+    O (Open/Closed) : Nouvelles stratégies ajoutables sans modification du code existant
+    L (Liskov Substitution) : Toutes les implémentations respectent le contrat de l'interface
+    I (Interface Segregation) : Interfaces spécialisées pour chaque type d'opération
+    D (Dependency Inversion) : Le code client dépend des abstractions, pas des implémentations concrètes
+
 
 ### Diagramme de Classes UML
 ![Diagramme de Classes UML - Vue d'ensemble](./diagramme.png)
