@@ -28,6 +28,7 @@ echo.
 echo Compilation reussie! Les fichiers .class sont dans le dossier 'passwdcracker/out'
 echo.
 echo Exemples d'utilisation:
+echo   cd passwdcracker
 echo   java -cp out CrackerApp bruteForce local admin
 echo   java -cp out CrackerApp dictionnary remote user
 echo.
