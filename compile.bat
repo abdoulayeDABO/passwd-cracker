@@ -2,11 +2,10 @@
 echo Compilation de la version amelioree du Password Cracker...
 echo.
 
-REM Creation du dossier de sortie s'il n'existe pas
-if not exist "out" mkdir out
-
 REM Compilation des classes principales
 echo Compilation des classes principales...
+
+cd passwdcracker
 javac -d out -cp "src" src/*.java src/utils/*.java
 
 if %ERRORLEVEL% NEQ 0 (
@@ -26,10 +25,11 @@ if %ERRORLEVEL% NEQ 0 (
 )
 
 echo.
-echo Compilation reussie! Les fichiers .class sont dans le dossier 'out'
+echo Compilation reussie! Les fichiers .class sont dans le dossier 'passwdcracker/out'
 echo.
 echo Exemples d'utilisation:
 echo   java -cp out CrackerApp bruteForce local admin
 echo   java -cp out CrackerApp dictionnary remote user
 echo.
-pause 
+
+
