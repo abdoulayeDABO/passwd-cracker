@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Authentification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f5f7fa;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 2.5rem 2rem 2rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      min-width: 320px;
+      max-width: 350px;
+    }
+    h2 {
+      text-align: center;
+      color: #2d3a4b;
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #4a5a6a;
+      font-weight: 500;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid #d1d9e6;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #f8fafc;
+      transition: border 0.2s;
+    }
+    input[type="text"]:focus, input[type="password"]:focus {
+      border: 1.5px solid #4f8cff;
+      outline: none;
+      background: #fff;
+    }
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      background: linear-gradient(90deg, #4f8cff 0%, #2355d8 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #2355d8 0%, #4f8cff 100%);
+    }
+    .footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #b0b8c1;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Connexion en ligne</h2>
+    <form method="POST" action="login.php">
+      <label for="username">Login</label>
+      <input type="text" id="username" name="username" value="admin" required autocomplete="username">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password">
+      <button type="submit">Se connecter</button>
+    </form>
+    <div class="footer">Projet Password Cracker &copy; 2024</div>
+  </div>
+</body>
+</html> 

@@ -2,26 +2,22 @@
 public class CrackerApp {
 
     public static boolean verifier_argumets(String[] args) {
-        if (args.length < 2 || args.length > 3) {
+        if (args.length < 3) {
             System.out.println("Usage: java CrackerApp <type> <cible> <login>");
             return false;
         }
-
         if (!args[0].equals("dictionnary") && !args[0].equals("bruteForce")) {
             System.out.println("Type d'attaque non reconnu. Veuillez spécifier 'dictionnary' ou 'bruteForce'.");
             return false;
         }
-
         if (!args[1].equals("local") && !args[1].equals("remote")) {
             System.out.println("Cible non reconnue. Veuillez spécifier 'local' ou 'remote'.");
             return false;
         }
-
         if (args[2] == null || args[2].isEmpty()) {
             System.out.println("Le login ne peut pas être vide.");
             return false;
         }
-
         return true;
     }
 
@@ -36,25 +32,40 @@ public class CrackerApp {
         }
 
         String type = args[0];
-        String cible = args[1];
+        String cibleType = args[1];
         String login = args[2];
 
-        FabriqueAttaque fabrique;
+        FabriqueAttaque fabriqueAttaque;
+        FabriqueCible fabriqueCible;
 
+        // Fabrique d'attaque
         switch (type) {
             case "dictionnary":
-                fabrique = new FabriqueAttaqueDictionnaire();
+                fabriqueAttaque = new FabriqueAttaqueDictionnaire();
                 break;
             case "bruteForce":
-                fabrique = new FabriqueAttaqueBruteForce();
+                fabriqueAttaque = new FabriqueAttaqueBruteForce();
                 break;
             default:
                 System.out.println("Type d'attaque non reconnu. Veuillez spécifier 'dictionnary' ou 'bruteForce'.");
                 return;
         }
 
-        Attaque attaque = fabrique.creerAttaque();
+        // Fabrique de cible
+        switch (cibleType) {
+            case "local":
+                fabriqueCible = new FabriqueCibleLocale();
+                break;
+            case "remote":
+                fabriqueCible = new FabriqueCibleEnLigne();
+                break;
+            default:
+                System.out.println("Cible non reconnue. Veuillez spécifier 'local' ou 'remote'.");
+                return;
+        }
+
+        Attaque attaque = fabriqueAttaque.creerAttaque();
+        CibleAuthentification cible = fabriqueCible.creerCible();
         attaque.initier(cible, login);
     }
-
 }
